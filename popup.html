@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PromptPilot</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <button id="createFolder" class="create-folder-btn">Create Folder</button>
+      <div class="search-container">
+        <input type="text" id="searchPrompts" placeholder="Search Prompts...">
+      </div>
+    </div>
+    <div id="promptLibrary" class="prompt-library"></div>
+  </div>
+  
+  <!-- Modals -->
+  <div id="promptModal" class="modal">
+    <div class="modal-content">
+      <h2 id="modalTitle">Create New Prompt</h2>
+      <input type="text" id="promptTitle" placeholder="Prompt Title">
+      <textarea id="promptContent" placeholder="Enter your prompt here..."></textarea>
+      <div class="modal-buttons">
+        <button id="savePrompt" class="btn primary">Save</button>
+        <button id="cancelPrompt" class="btn">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="folderModal" class="modal">
+    <div class="modal-content">
+      <h2 id="folderModalTitle">Create New Folder</h2>
+      <input type="text" id="folderName" placeholder="Folder Name">
+      <div class="modal-buttons">
+        <button id="saveFolder" class="btn primary">Save</button>
+        <button id="cancelFolder" class="btn">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
