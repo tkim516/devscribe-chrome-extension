@@ -5,7 +5,8 @@
     "description": "Organize and manage your AI prompts efficiently",
     "permissions": [
       "storage",
-      "clipboardWrite"
+      "clipboardWrite",
+      "tabs"
     ],
     "action": {
       "default_popup": "popup.html",

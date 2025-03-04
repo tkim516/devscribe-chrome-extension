@@ -7,9 +7,17 @@
 <body>
   <div class="container">
     <div class="header">
-      <button id="createFolder" class="create-folder-btn">Create Folder</button>
-      <div class="search-container">
-        <input type="text" id="searchPrompts" placeholder="Search Prompts...">
+      <div class="button-row">
+        <button id="createFolder" class="create-folder-btn">Create Folder</button>
+        <button id="importPrompts" class="action-btn">Import</button>
+        <button id="exportPrompts" class="action-btn">Export</button>
+        <button id="llmSettings" class="action-btn">LLM Settings</button>
+      </div>
+      <div class="search-row">
+        <div class="search-container">
+          <i class="search-icon"> &#128269;</i>
+          <input type="text" id="searchPrompts" placeholder="Browse your prompt library...">
+        </div>
       </div>
     </div>
     <div id="promptLibrary" class="prompt-library"></div>
@@ -40,5 +48,101 @@
   </div>
 
   <script src="popup.js"></script>
+
+  <!-- Add this to popup.html before the closing body tag -->
+  <div id="importModal" class="modal">
+    <div class="modal-content">
+      <h2>Import Prompts</h2>
+      <div class="import-options">
+        <p>Select file to import (.json or .csv):</p>
+        <input type="file" id="importFile" accept=".json,.csv">
+        <div class="import-options-group">
+          <label>
+            <input type="radio" name="importMode" value="merge" checked> 
+            Merge with existing prompts
+          </label>
+          <label>
+            <input type="radio" name="importMode" value="replace"> 
+            Replace existing library
+          </label>
+        </div>
+      </div>
+      <div id="importPreview" class="import-preview">
+        <h3>Import Preview</h3>
+        <div id="previewContent" class="preview-content">
+          Select a file to see import preview
+        </div>
+      </div>
+      <div class="modal-buttons">
+        <button id="confirmImport" class="btn primary" disabled>Import</button>
+        <button id="cancelImport" class="btn">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="llmSettingsModal" class="modal">
+    <div class="modal-content">
+      <h2>LLM Settings</h2>
+      <p>Configure URLs for your preferred AI platforms:</p>
+      
+      <div class="settings-group">
+        <label for="chatgptUrl">ChatGPT</label>
+        <input type="text" id="chatgptUrl" value="https://chat.openai.com/">
+      </div>
+      
+      <div class="settings-group">
+        <label for="claudeUrl">Claude</label>
+        <input type="text" id="claudeUrl" value="https://claude.ai/chat">
+      </div>
+      
+      <div class="settings-group">
+        <label for="perplexityUrl">Perplexity</label>
+        <input type="text" id="perplexityUrl" value="https://www.perplexity.ai/">
+      </div>
+      
+      <div class="settings-group">
+        <label for="grokUrl">Grok</label>
+        <input type="text" id="grokUrl" value="https://chat.grok.ai/">
+      </div>
+      
+      <div class="settings-group">
+        <label for="defaultLLM">Default LLM</label>
+        <select id="defaultLLM">
+          <option value="chatgpt">ChatGPT</option>
+          <option value="claude">Claude</option>
+          <option value="perplexity">Perplexity</option>
+          <option value="grok">Grok</option>
+        </select>
+      </div>
+      
+      <div class="modal-buttons">
+        <button id="saveLLMSettings" class="btn primary">Save</button>
+        <button id="cancelLLMSettings" class="btn">Cancel</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Prompt Settings Modal -->
+  <div id="promptLLMModal" class="modal">
+    <div class="modal-content">
+      <h2>Prompt LLM Settings</h2>
+      <p>Choose a default LLM for this prompt:</p>
+      
+      <div class="settings-group">
+        <select id="promptDefaultLLM">
+          <option value="global">Use Global Default</option>
+          <option value="chatgpt">ChatGPT</option>
+          <option value="claude">Claude</option>
+          <option value="perplexity">Perplexity</option>
+          <option value="grok">Grok</option>
+        </select>
+      </div>
+      
+      <div class="modal-buttons">
+        <button id="savePromptLLM" class="btn primary">Save</button>
+        <button id="cancelPromptLLM" class="btn">Cancel</button>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
