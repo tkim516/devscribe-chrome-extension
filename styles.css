@@ -488,3 +488,114 @@
     text-align: center;
     width: 100%;
   }
+
+  .format-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .format-modal-content {
+    background-color: var(--surface-color);
+    padding: 20px;
+    border-radius: 4px;
+    width: 300px;
+  }
+  
+  .format-options {
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .format-options label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+  }
+
+  /* Preview styles for import */
+  .preview-prompts {
+    margin-left: 15px;
+    margin-top: 5px;
+    font-size: 0.9em;
+  }
+  
+  .preview-prompt-title {
+    color: #aaa;
+    padding: 2px 0;
+  }
+  
+  .preview-more {
+    font-style: italic;
+    color: #888;
+    margin-top: 3px;
+  }
+  
+  .loading {
+    font-style: italic;
+    color: #aaa;
+    text-align: center;
+    padding: 10px;
+  }
+  
+  .error {
+    color: #e74c3c;
+    padding: 8px;
+    border-left: 3px solid #e74c3c;
+    background-color: rgba(231, 76, 60, 0.1);
+    margin: 10px 0;
+  }
+  
+  /* Export format modal styles */
+  .format-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .format-modal-content {
+    background-color: var(--surface-color);
+    padding: 20px;
+    border-radius: 4px;
+    width: 300px;
+  }
+  
+  .format-options {
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .format-options label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+  }
+  
+  /* Error container for critical errors */
+  .error-container {
+    background-color: var(--surface-color);
+    padding: 20px;
+    border-radius: 4px;
+    border-left: 4px solid #e74c3c;
+    margin: 20px 0;
+  }
