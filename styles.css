@@ -78,11 +78,12 @@
     padding: 12px;
     cursor: pointer;
   }
-  
+
   .folder-content {
     display: none;
     border-top: 1px solid var(--border-color);
-  }
+    position: relative; /* Needed for absolute positioning of dropdown */
+}
   
   .folder-content.open {
     display: block;
@@ -297,13 +298,16 @@
   .dropdown-content {
     display: none;
     position: absolute;
-    right: 0;
+    top: 0;
+    right: 0; /* Align it to the right inside the folder */
+    width: 200px; /* Adjust width as needed */
+    height: 100%; /* Full height of the folder */
     background-color: var(--surface-color);
-    min-width: 180px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    z-index: 1;
+    z-index: 999;
     border-radius: 4px;
     border: 1px solid var(--border-color);
+    overflow-y: auto; /* Enable scrolling if needed */
   }
   
   .dropdown-content a {
@@ -312,6 +316,7 @@
     text-decoration: none;
     display: block;
     font-size: 14px;
+    background-color: var(--surface-color);
   }
   
   .dropdown-content a:hover {
@@ -320,8 +325,9 @@
   
   .dropdown-content.show {
     display: block;
-  }
-  
+    height: 500%;
+    top: -50%;
+}
   /* Submenu */
   .dropdown-submenu {
     position: relative;

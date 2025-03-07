@@ -601,9 +601,9 @@ function renderLibrary() {
         <div class="folder-header">
           <span class="folder-name">${folder.name || 'Unnamed Folder'}</span>
           <div class="actions">
-            <button class="btn add-prompt">add</button>
-            <button class="btn mod-folder">mod</button>
-            <button class="btn del-folder">del</button>
+            <button class="btn add-prompt">Add</button>
+            <button class="btn mod-folder">Edit</button>
+            <button class="btn del-folder">Delete</button>
           </div>
         </div>
         <div class="folder-content">
@@ -613,25 +613,20 @@ function renderLibrary() {
               <div class="prompt-item">
                 <span class="prompt-title">${prompt.title || 'Untitled'}</span>
                 <div class="actions">
-                  <button class="btn copy-prompt" data-content="${(prompt.content || '').replace(/"/g, '&quot;')}">copy</button>
+                  <button class="btn copy-prompt" data-content="${(prompt.content || '').replace(/"/g, '&quot;')}">Copy</button>
                   <div class="dropdown">
-                    <button class="btn action-btn">actions</button>
+                    <button class="btn action-btn">Open with LLM</button>
                     <div class="dropdown-content">
-                      <a href="#" class="send-to-default" data-prompt-id="${prompt.id}">Send to Default LLM</a>
-                      <div class="dropdown-submenu">
-                        <a href="#" class="dropdown-submenu-title">Send to...</a>
-                        <div class="dropdown-submenu-content">
-                          <a href="#" class="send-to-llm" data-llm="chatgpt" data-prompt-id="${prompt.id}">ChatGPT</a>
-                          <a href="#" class="send-to-llm" data-llm="claude" data-prompt-id="${prompt.id}">Claude</a>
-                          <a href="#" class="send-to-llm" data-llm="perplexity" data-prompt-id="${prompt.id}">Perplexity</a>
-                          <a href="#" class="send-to-llm" data-llm="grok" data-prompt-id="${prompt.id}">Grok</a>
-                        </div>
-                      </div>
+                      <a href="#" class="send-to-default" data-prompt-id="${prompt.id}">Send to Default LLM</a>                    
+                      <a href="#" class="send-to-llm" data-llm="chatgpt" data-prompt-id="${prompt.id}">ChatGPT</a>
+                      <a href="#" class="send-to-llm" data-llm="claude" data-prompt-id="${prompt.id}">Claude</a>
+                      <a href="#" class="send-to-llm" data-llm="perplexity" data-prompt-id="${prompt.id}">Perplexity</a>
+                      <a href="#" class="send-to-llm" data-llm="grok" data-prompt-id="${prompt.id}">Grok</a>
                       <a href="#" class="set-default-llm" data-prompt-id="${prompt.id}">Set Default LLM</a>
                     </div>
                   </div>
-                  <button class="btn mod-prompt">mod</button>
-                  <button class="btn del-prompt">del</button>
+                  <button class="btn mod-prompt">Edit</button>
+                  <button class="btn del-prompt">Delete</button>
                 </div>
               </div>
             `;
@@ -684,6 +679,7 @@ function renderLibrary() {
             }
           });
         }
+        
         const delPromptButtons = folderEl.querySelectorAll('.del-prompt');
         if (delPromptButtons.length > 0 && Array.isArray(folder.prompts)) {
           delPromptButtons.forEach((button, index) => {
