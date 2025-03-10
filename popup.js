@@ -617,7 +617,8 @@ function renderLibrary() {
                   <div class="dropdown">
                     <button class="btn action-btn">Open with LLM</button>
                     <div class="dropdown-content">
-                      <a href="#" class="send-to-default" data-prompt-id="${prompt.id}">Send to Default LLM</a>                    
+                      <a href="#" class="send-to-default" data-prompt-id="${prompt.id}">Send to Default LLM</a>
+                      <a href="#" class="send-to-all" data-prompt-id="${prompt.id}">Compare All LLMs</a>                    
                       <a href="#" class="send-to-llm" data-llm="chatgpt" data-prompt-id="${prompt.id}">ChatGPT</a>
                       <a href="#" class="send-to-llm" data-llm="claude" data-prompt-id="${prompt.id}">Claude</a>
                       <a href="#" class="send-to-llm" data-llm="perplexity" data-prompt-id="${prompt.id}">Perplexity</a>
@@ -1205,10 +1206,10 @@ function handleFileSelect(event) {
 
 // LLM Settings and Integration
 let llmSettings = {
-  chatgpt: 'https://chat.openai.com/',
-  claude: 'https://claude.ai/new',
-  perplexity: 'https://www.perplexity.ai/',
-  grok: 'https://grok.com/',
+  chatgpt: 'https://chat.openai.com/?model=gpt-4&q=',
+  claude: 'https://claude.ai/?q=',
+  perplexity: 'https://www.perplexity.ai/?q=',
+  grok: 'https://x.com/i/grok?text=',
   defaultLLM: 'chatgpt'
 };
 let promptLLMPreferences = {};
@@ -1263,6 +1264,12 @@ function setupLLMFeatures() {
           e.preventDefault();
           if (typeof e.target.dataset === 'object' && e.target.dataset.promptId) {
             sendToDefaultLLM(e.target.dataset.promptId);
+          }
+          closeAllDropdowns();
+        } else if (e.target.matches('.send-to-all')) {
+          e.preventDefault();
+          if (typeof e.target.dataset === 'object' && e.target.dataset.promptId) {
+            sendToAllLLMs(e.target.dataset.promptId);
           }
           closeAllDropdowns();
         } else if (e.target.matches('.send-to-llm')) {
@@ -1406,6 +1413,17 @@ function sendToDefaultLLM(promptId) {
   });
 }
 
+async function sendToAllLLMs(promptId) {
+  safeExecute(async () => {
+    const prompt = getPromptById(promptId);
+    if (!prompt) return;
+    sendToLLM(promptId, 'chatgpt');
+    sendToLLM(promptId, 'claude');
+    sendToLLM(promptId, 'perplexity');
+    sendToLLM(promptId, 'grok');
+  });
+}
+
 async function sendToLLM(promptId, llmKey) {
   return safeExecute(async () => {
     const prompt = getPromptById(promptId);
@@ -1417,7 +1435,10 @@ async function sendToLLM(promptId, llmKey) {
     }
     try {
       await navigator.clipboard.writeText(prompt.content);
-      chrome.tabs.create({ url: llmUrl });
+      
+      targetUrl = llmUrl + prompt.content;
+      chrome.tabs.create({ url: targetUrl })
+
       showNotification(`Prompt copied and opening ${llmKey.charAt(0).toUpperCase() + llmKey.slice(1)}...`);
     } catch (error) {
       console.error('Error sending to LLM:', error);
@@ -1425,3 +1446,4 @@ async function sendToLLM(promptId, llmKey) {
     }
   });
 }
+

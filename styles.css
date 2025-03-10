@@ -43,6 +43,14 @@ body {
   line-height: 1.5;
 }
 
+.title-container {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+  justify-content: center;
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -302,9 +310,7 @@ body {
 }
 
 .del-prompt, .del-folder {
-  background-color: transparent;
-  border: 1px solid var(--danger-color);
-  color: var(--danger-color);
+  background-color: var(--danger-color);
 }
 
 .del-prompt:hover, .del-folder:hover {
@@ -323,7 +329,6 @@ body {
 
 /* LLM Dropdown Styling */
 .dropdown {
-  position: relative;
   display: inline-block;
 }
 
@@ -346,7 +351,6 @@ body {
   display: none;
   position: absolute;
   right: 0;
-  top: 28px;
   width: 200px;
   background-color: var(--surface-color);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
